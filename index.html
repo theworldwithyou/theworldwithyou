@@ -1,1 +1,65 @@
-<h1>The world with you</h1>
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The world with you</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <style>
+      html {
+        font-weight: 250;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+      }
+      div {
+        margin-top: 5vh;
+      }
+      .main {
+        width: 100vw;
+        margin: 2vh;
+      }
+      .title {
+        font-size: 5vw;
+        font-weight: 800;
+      }
+      .time {
+        text-align: right;
+        font-size: 6vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="title">现在是我和她在一起的</div>
+
+      <div class="time"></div>
+    </div>
+
+    <script>
+      const time = document.querySelector(".time");
+      function withu() {
+        const start = new Date("2021-08-31"),
+          now = new Date();
+        const years = now.getFullYear() - start.getFullYear(),
+          month = now.getMonth() - start.getMonth(),
+          day = now.getDate() - start.getDate(),
+          hour = now.getHours() - start.getHours(),
+          minute = now.getMinutes() - start.getMinutes(),
+          seconds = now.getSeconds() - start.getSeconds();
+        return `${years}年${month}月${day}天${hour}时${minute}分${seconds}秒`.replace(
+          /-/g,
+          "负"
+        );
+      }
+      setInterval(() => {
+        time.innerHTML = withu();
+      }, 1000);
+    </script>
+  </body>
+</html>
