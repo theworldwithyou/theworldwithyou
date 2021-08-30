@@ -10,6 +10,7 @@
       html {
         font-weight: 250;
       }
+
       body {
         height: 100vh;
         display: flex;
@@ -18,19 +19,50 @@
         margin: 0 !important;
         padding: 0 !important;
       }
+
       .main {
         margin: 0 auto;
         text-align: center;
         font-size: 4vw;
+        letter-spacing: 3px;
       }
-      .time {
+
+      .content {
         width: 100vw;
+      }
+
+      .goesby {
+        animation: fadeout 6s ease 0s 1;
+      }
+
+      .time {
+        animation: fadein 6s ease 6s 1;
+      }
+
+      @keyframes fadeout {
+        0% {
+          opacity: 100;
+          letter-spacing: 3px;
+        }
+        100% {
+          opacity: 0;
+          letter-spacing: 12px;
+        }
+      }
+
+      @keyframes fadein {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1000;
+        }
       }
 
       @media (prefers-color-scheme: dark) {
         body {
           background-color: #212121;
-          color: #E0E0E0;
+          color: #e0e0e0;
         }
         div {
           border-color: #353535;
@@ -40,15 +72,15 @@
   </head>
   <body>
     <div class="main">
-      <div class="time">
-        waiting
+      <div class="content">
+        Waiting for
         <br />
-        <div class="seconds">Time Goes By</div>
+        <div class="time"><span class="goesby">Time Goes By</span></div>
       </div>
     </div>
 
     <script>
-      const seconds = document.querySelector(".seconds");
+      const seconds = document.querySelector(".time");
 
       function getTimeLeft() {
         const start = new Date("2021-08-30 13:40:05"),
@@ -104,24 +136,26 @@
         const timeLeft = getTimeLeft();
         const timeGoesBy =
           timeLeft.year +
-          "years" +
+          " years " +
           timeLeft.month +
-          "Months" +
+          " Months " +
           timeLeft.day +
-          "Days" +
-          "\r\n" +
+          " Days " +
+          "<br>" +
           timeLeft.hour +
-          "Hours" +
+          " Hours " +
           timeLeft.minute +
-          "Minutes" +
+          " Minutes " +
           timeLeft.second +
-          "Seconds";
+          " Seconds";
         return timeGoesBy;
       }
 
-      setInterval(() => {
-        seconds.innerHTML = waiting();
-      }, 1000);
+      setTimeout(() => {
+        setInterval(() => {
+          seconds.innerHTML = waiting();
+        }, 1000);
+      }, 5000);
     </script>
   </body>
 </html>
