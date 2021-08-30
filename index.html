@@ -21,7 +21,7 @@
       .main {
         margin: 0 auto;
         text-align: center;
-        font-size: 6vw;
+        font-size: 4vw;
       }
       .time {
         width: 100vw;
@@ -31,20 +31,86 @@
   <body>
     <div class="main">
       <div class="time">
-        wait
+        waiting
         <br />
-        <span class="seconds"></span>
-        <br />
-        seconds
+        <div class="seconds">Time Goes By</div>
       </div>
     </div>
 
     <script>
       const seconds = document.querySelector(".seconds");
+
+      function getTimeLeft() {
+        const start = new Date("2021-08-30 13:40:05"),
+          now = new Date();
+        const floorDate = Math.floor;
+        let waitingSeconds = (now - start) / 1000;
+        const yearSec = 86400 * 365,
+          monthSec = 86400 * 30,
+          daySec = 86400,
+          hourSec = 3600,
+          minuteSec = 60;
+        let year = 0,
+          month = 0,
+          day = 0,
+          minute = 0,
+          hour = 0,
+          second = 0;
+        if (waitingSeconds > yearSec) {
+          year = floorDate(waitingSeconds / yearSec);
+          waitingSeconds %= yearSec;
+        }
+        if (waitingSeconds > monthSec) {
+          month = floorDate(waitingSeconds / monthSec);
+          waitingSeconds %= monthSec;
+        }
+        if (waitingSeconds > daySec) {
+          day = floorDate(waitingSeconds / daySec);
+          waitingSeconds %= daySec;
+        }
+        if (waitingSeconds > hourSec) {
+          hour = floorDate(waitingSeconds / hourSec);
+          waitingSeconds %= hourSec;
+          console.log(waitingSeconds);
+        }
+        if (waitingSeconds > minuteSec) {
+          minute = floorDate(waitingSeconds / minuteSec);
+          waitingSeconds %= minuteSec;
+        }
+        second = floorDate(waitingSeconds);
+
+        const obj = {
+          year,
+          month,
+          day,
+          hour,
+          minute,
+          second,
+        };
+        return obj;
+      }
+
+      function waiting() {
+        const timeLeft = getTimeLeft();
+        const timeGoesBy =
+          timeLeft.year +
+          "years" +
+          timeLeft.month +
+          "Months" +
+          timeLeft.day +
+          "Days" +
+          "\r\n" +
+          timeLeft.hour +
+          "Hours" +
+          timeLeft.minute +
+          "Minutes" +
+          timeLeft.second +
+          "Seconds";
+        return timeGoesBy;
+      }
+
       setInterval(() => {
-        seconds.innerHTML = Math.floor(
-          (new Date() - new Date("2021-08-30 00:00:00")) / 1000
-        );
+        seconds.innerHTML = waiting();
       }, 1000);
     </script>
   </body>
